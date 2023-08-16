@@ -33,3 +33,4 @@ jobs:
         echo "rashmika"
         ls -al
         mvn -B package --file pom.xml
+        java -jar target/my-app-1.0-SNAPSHOT.jar
