@@ -22,6 +22,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 17
+      run: echo "**********************************"
+           echo "****Building***Jar*****************
       uses: actions/setup-java@v3
       with:
         java-version: '17'
@@ -44,5 +46,6 @@ jobs:
         docker build -t randeerdil/maven-test .
         docker tag randeerdil/maven-test randeerdil/maven-test:$IMAGE_TAG
         docker push randeerdil/maven-test:$IMAGE_TAG
+        echo "The latest docker image has been uploaded to the repo"
 
 
