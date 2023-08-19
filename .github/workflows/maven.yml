@@ -39,4 +39,9 @@ jobs:
         pwd
         echo "Manawadu"
         ls -al
+        echo "::set-env name=IMAGE_TAG::$(date +'%Y%m%d%H%M%S')"
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        docker build -t randeerdil/maven-test
+        docker tag randeerdil/maven-test randeerdil/maven-test:$IMAGE_TAG
+        docker push randeerdil/maven-test:$IMAGE_TAG
 
