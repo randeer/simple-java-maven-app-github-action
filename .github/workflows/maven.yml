@@ -35,9 +35,8 @@ jobs:
         mvn -B package --file pom.xml
         java -jar target/my-app-1.0-SNAPSHOT.jar
     - name: Build and push docker image
-      uses: mr-smithers-excellent/docker-build-push@v6
-      with:
-        image: randeerdil/maven-test
-        registry: docker.io
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+      run: |
+        pwd
+        echo "Manawadu"
+        ls -al
+
