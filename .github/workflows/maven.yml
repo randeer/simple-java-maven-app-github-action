@@ -34,6 +34,9 @@ jobs:
         ls -al
         mvn -B package --file pom.xml
         java -jar target/my-app-1.0-SNAPSHOT.jar
+    - name: Set Timestamp Variable
+      id: set_timestamp
+      run: echo "::set-output name=timestamp::$(date +'%Y%m%d%H%M%S')"
     - name: Build and push docker image
       run: |
         pwd
@@ -41,6 +44,7 @@ jobs:
         ls -al
         echo "::set-env name=IMAGE_TAG::$(date +'%Y%m%d%H%M%S')"
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        IMAGE_TAG=$({{ steps.set_timestamp.outputs.timestamp }})
         docker build -t randeerdil/maven-test
         docker tag randeerdil/maven-test randeerdil/maven-test:$IMAGE_TAG
         docker push randeerdil/maven-test:$IMAGE_TAG
